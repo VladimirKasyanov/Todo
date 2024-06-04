@@ -1,0 +1,9 @@
+.completed {
+display: block;
+}
+.inc {
+    display: block;
+}
+.all{
+    display: none;
+}

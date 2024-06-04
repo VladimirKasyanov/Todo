@@ -1,0 +1,11 @@
+.complete-t:active {
+    color: red;
+
+};
+.active-t:active {
+    color: blue;
+}
+.all-t:active {
+    color: green;
+}
+ 

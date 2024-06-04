@@ -1,0 +1,16 @@
+// const form = document.querySelector('form');
+const inputBox = document.getElementById('input__box')
+const todoList = document.getElementById('todo__list')
+const addButton = document.querySelector('.add')
+
+let 
+
+inputBox.addEventListener('click', function()){
+    let newTodo = {
+
+    }
+}
+
+
+
+todoList.addEventListener('cl')

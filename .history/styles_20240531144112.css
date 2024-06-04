@@ -1,0 +1,11 @@
+.complete-tab:active {
+    color: red;
+
+};
+.active-tab:active {
+    color: rgb(0, 162, 255);
+}
+.all-tab:active {
+    color: green;
+}
+ 
