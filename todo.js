@@ -54,7 +54,7 @@ const displayList = () => {
       item.checked ? "checked" : ""
     }>  
     <span class='some-text'>${item.description}</span>
-    <input class='new-input' type= 'text' value='${item.description.replace(/\s+/g, '')}' hidden></input>
+      <input class='new-input' type= 'text' value='${item.description.replace(/\s+/g, '')}' hidden></input>
     <button type='delete' class='del' id='${item.id}' >x</button>
     </li>
     `;    
@@ -120,11 +120,11 @@ const updateCounters = () => {
  }
 
  const NextPage = (event) => {
-  if (event.target.classList.contains(".pages")) {
+  if (event.target.classList.contains("createPage")) {
     page = Number(event.target.id)
     thisPage(page);
+    
  }
- displayList();
  }
 
 
@@ -132,7 +132,6 @@ const updateCounters = () => {
 function filterTodo () {
   switch(condition) {
      case 'active':
-      console.log("123456")
         return todoList.filter((item) => !item.checked);
        case 'completed':
         return todoList.filter((item) => item.checked);
@@ -153,17 +152,17 @@ function swapFocus (event) {
   }
   displayList();
   switch(condition) {
-    case 'all':
-      appendChild[0].classList.add('active')
-      break
     case 'active':
       appendChild[1].classList.add('active')
       break
     case 'completed':
       appendChild[2].classList.add('active')
       break
+    default: 
+      appendChild[0].classList.add('active')
+      break
   }
-
+  displayList();
 }
 
 // const chooseCategories = (event) => {
@@ -254,9 +253,7 @@ const changeDescriptionFinish = (event) => {
   list.addEventListener('keyup', changeDescriptionFinish);
   inputBox.addEventListener('keydown', addButtonEnter);
   allButton.addEventListener('click', swapFocus);
-  // totalCounter.addEventListener('click', filterTodo);
-  // completedCounter.addEventListener('click', filterTodo);
-  // incompleteCounter.addEventListener('click', filterTo
+  pagesPagination.addEventListener('click', pagination);
 
 
 
