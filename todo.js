@@ -152,6 +152,18 @@ function swapFocus (event) {
     condition = event.target.id
   }
   displayList();
+  switch(condition) {
+    case 'all':
+      appendChild[0].classList.add('active')
+      break
+    case 'active':
+      appendChild[1].classList.add('active')
+      break
+    case 'completed':
+      appendChild[2].classList.add('active')
+      break
+  }
+
 }
 
 // const chooseCategories = (event) => {
