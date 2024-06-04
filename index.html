@@ -16,23 +16,23 @@
     <div class="container">
       <h2>TodoJs App</h2>
       <form>
-        <input type="text" class="input__box" />
-        <button type="button" class="add">Add Task</button>
-        <button type="button" onclick="checkAll()" class="check-all">
+        <input type="text" class="input__box form-control" />
+        <button type="button" class="add btn btn-success">Add Task</button>
+        <button type="button" onclick="checkAll()" class="check-all btn btn-success">
           Check All
         </button>
-        <button type="button" onclick="removeCheck()" class="remove-check">
+        <button type="button" onclick="removeCheck()" class="remove-check btn btn-danger">
           Remove check
         </button>
       </form>
       <div class="todo__li">
         <ul class="list"></ul>
-        <div class="all-button" type="button" >
-          <button class="all-tab active btn" id="all" >All(0)</button>
-          <button class="active-tab btn" id="active" >active(0)</button>
-          <button class="complete-tab btn" id="completed">completed(0)</button>
+        <div class="all-button " type="button" >
+          <button class="all-tab active btn btn-primary" id="all" >All(0)</button>
+          <button class="active-tab btn btn-primary " id="active" >active(0)</button>
+          <button class="complete-tab btn btn-primary " id="completed">completed(0)</button>
         </div>
-        <div class="pages">
+        <div class="pages btn btn-info">
           
         </div>
       </div>
