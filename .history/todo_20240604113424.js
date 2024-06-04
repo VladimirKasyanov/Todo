@@ -148,10 +148,7 @@ function swapFocus (event) {
   appendChild[0].classList.remove('active');
   appendChild[1].classList.remove('active');
   appendChild[2].classList.remove('active');
-  if (event.target.classList.contains('btn')) {
-    condition = event.target.id
-  }
-  displayList();
+  if (event.target.classList.contains('btn'))
 }
 
 // const chooseCategories = (event) => {
@@ -241,10 +238,9 @@ const changeDescriptionFinish = (event) => {
   addButton.addEventListener("click", task);
   list.addEventListener('keyup', changeDescriptionFinish);
   inputBox.addEventListener('keydown', addButtonEnter);
-  allButton.addEventListener('click', swapFocus);
-  // totalCounter.addEventListener('click', filterTodo);
-  // completedCounter.addEventListener('click', filterTodo);
-  // incompleteCounter.addEventListener('click', filterTo
+  totalCounter.addEventListener('click', filterTodo);
+  completedCounter.addEventListener('click', filterTodo);
+  incompleteCounter.addEventListener('click', filterTodo);
 
 
 

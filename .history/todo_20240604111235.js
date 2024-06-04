@@ -9,7 +9,7 @@ const completedCounter = document.querySelector("#completed");
 const incompleteCounter = document.querySelector("#active");
 const allButton = document.querySelector(".all-button");
 const pagesPagination = document.querySelector(".pages")
-const pagesButton = document.querySelector(".createPage")
+// const pagesButton = document.querySelector(".createPage")
 
 const keyEnter = "Enter"
 const keyEscape = "Escape"
@@ -131,28 +131,17 @@ const updateCounters = () => {
 
 function filterTodo () {
   switch(condition) {
-     case 'active':
+       case condition = 'active':
       console.log("123456")
-        return todoList.filter((item) => !item.checked);
+      return todoList.filter((item) => !item.checked);
        case 'completed':
-        return todoList.filter((item) => item.checked);
-      default:
-        return todoList
+      return todoList.filter((item) => item.checked);
+    default:
+      return todoList
     };
     
     
 };
-
-function swapFocus (event) {
-  let appendChild = allButton.children;
-  appendChild[0].classList.remove('active');
-  appendChild[1].classList.remove('active');
-  appendChild[2].classList.remove('active');
-  if (event.target.classList.contains('btn')) {
-    condition = event.target.id
-  }
-  displayList();
-}
 
 // const chooseCategories = (event) => {
 
@@ -241,10 +230,9 @@ const changeDescriptionFinish = (event) => {
   addButton.addEventListener("click", task);
   list.addEventListener('keyup', changeDescriptionFinish);
   inputBox.addEventListener('keydown', addButtonEnter);
-  allButton.addEventListener('click', swapFocus);
-  // totalCounter.addEventListener('click', filterTodo);
-  // completedCounter.addEventListener('click', filterTodo);
-  // incompleteCounter.addEventListener('click', filterTo
+  totalCounter.addEventListener('click', filterTodo);
+  completedCounter.addEventListener('click', filterTodo);
+  incompleteCounter.addEventListener('click', filterTodo);
 
 
 

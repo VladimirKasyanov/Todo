@@ -97,7 +97,7 @@ const updateCounters = () => {
  const pagination = () => {
    let pages ="";
    const count = filterTodo().length
-   countPage = Math.ceil(count / itemPerPage);
+   countPage = (Math.ceil(count / itemPerPage))
    lastPage = countPage;
 
    for  (let i = 0; i < countPage; i+=1){
@@ -115,7 +115,7 @@ const updateCounters = () => {
   if(newPage != lastPage){
     page = newPage  
   }else{
-    page = Math.ceil(filterTodo().length / itemPerPage);
+    page = (Math.ceil(filterTodo().length / itemPerPage))
   }
  }
 
@@ -131,28 +131,17 @@ const updateCounters = () => {
 
 function filterTodo () {
   switch(condition) {
-     case 'active':
+    case 'active':
       console.log("123456")
-        return todoList.filter((item) => !item.checked);
+      return todoList.filter((item) => !item.checked);
        case 'completed':
-        return todoList.filter((item) => item.checked);
-      default:
-        return todoList
+      return todoList.filter((item) => item.checked);
+    default:
+      return todoList
     };
     
     
 };
-
-function swapFocus (event) {
-  let appendChild = allButton.children;
-  appendChild[0].classList.remove('active');
-  appendChild[1].classList.remove('active');
-  appendChild[2].classList.remove('active');
-  if (event.target.classList.contains('btn')) {
-    condition = event.target.id
-  }
-  displayList();
-}
 
 // const chooseCategories = (event) => {
 
@@ -241,12 +230,6 @@ const changeDescriptionFinish = (event) => {
   addButton.addEventListener("click", task);
   list.addEventListener('keyup', changeDescriptionFinish);
   inputBox.addEventListener('keydown', addButtonEnter);
-  allButton.addEventListener('click', swapFocus);
-  // totalCounter.addEventListener('click', filterTodo);
-  // completedCounter.addEventListener('click', filterTodo);
-  // incompleteCounter.addEventListener('click', filterTo
-
-
 
   
 

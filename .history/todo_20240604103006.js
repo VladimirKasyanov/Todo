@@ -8,7 +8,7 @@ const totalCounter = document.querySelector("#all");
 const completedCounter = document.querySelector("#completed");
 const incompleteCounter = document.querySelector("#active");
 const allButton = document.querySelector(".all-button");
-const pagesPagination = document.querySelector(".pages")
+const pages = document.querySelector(".pages")
 const pagesButton = document.querySelector(".createPage")
 
 const keyEnter = "Enter"
@@ -44,11 +44,12 @@ const task = (event) => {
 const displayList = () => {
   
   thisPage(page);
-  const sorteredArray = filterTodo()
-  .slice((page - 1) * itemPerPage, page * itemPerPage);
+  // const sorteredArray = filterTodo()
+  // .slice((page - 1) * itemPerPage, page * itemPerPage);
+  
   let htmllist = "";
   sorteredArray.forEach((item) => {
-    htmllist += `
+    list.innerHTML += `
     <li id ='${item.id}'> 
     <input class = 'check' type='checkBox' id='${item.id}' ${
       item.checked ? "checked" : ""
@@ -97,25 +98,23 @@ const updateCounters = () => {
  const pagination = () => {
    let pages ="";
    const count = filterTodo().length
-   countPage = Math.ceil(count / itemPerPage);
+   countPage = (Math.ceil(count / itemPerPage))
    lastPage = countPage;
 
    for  (let i = 0; i < countPage; i+=1){
    pages += `
-    <button class ='createPage ${i + 1 === page ? 'active' : '' }'
-    id = '${i+1}'
-    >
-    ${i+1}
-    </button>`;
+    <button class ='createPage ${i + 1 === pages ? 'active' : '' }' id = '${i+1}'>'${i+1}'
+    </button>
+   `
   }
-  pagesPagination.innerHTML = pages;
+  pages.innerHTML = pages
  }
 
  function thisPage (newPage){
   if(newPage != lastPage){
     page = newPage  
   }else{
-    page = Math.ceil(filterTodo().length / itemPerPage);
+    page = (Math.ceil(filterTodo().length / itemPerPage))
   }
  }
 
@@ -131,28 +130,17 @@ const updateCounters = () => {
 
 function filterTodo () {
   switch(condition) {
-     case 'active':
+    case 'active':
       console.log("123456")
-        return todoList.filter((item) => !item.checked);
+      return todoList.filter((item) => !item.checked);
        case 'completed':
-        return todoList.filter((item) => item.checked);
-      default:
-        return todoList
+      return todoList.filter((item) => item.checked);
+    default:
+      return todoList
     };
     
     
 };
-
-function swapFocus (event) {
-  let appendChild = allButton.children;
-  appendChild[0].classList.remove('active');
-  appendChild[1].classList.remove('active');
-  appendChild[2].classList.remove('active');
-  if (event.target.classList.contains('btn')) {
-    condition = event.target.id
-  }
-  displayList();
-}
 
 // const chooseCategories = (event) => {
 
@@ -202,7 +190,6 @@ const editNew = (elementId) => {
   
   })
   displayList(todoList);
-  updateCounters();
   
 
 
@@ -241,12 +228,6 @@ const changeDescriptionFinish = (event) => {
   addButton.addEventListener("click", task);
   list.addEventListener('keyup', changeDescriptionFinish);
   inputBox.addEventListener('keydown', addButtonEnter);
-  allButton.addEventListener('click', swapFocus);
-  // totalCounter.addEventListener('click', filterTodo);
-  // completedCounter.addEventListener('click', filterTodo);
-  // incompleteCounter.addEventListener('click', filterTo
-
-
 
   
 
