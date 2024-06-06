@@ -9,4 +9,7 @@
 .all-tab:active {
     color: green;
 }
+.input__box {
+    border: 2px solid black !important;
+}
  
