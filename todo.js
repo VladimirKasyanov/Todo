@@ -1,3 +1,5 @@
+/* eslint-disable no-useless-escape */
+/* eslint-disable no-undef */
  (() =>{ 
 const checkAllInput = document.querySelector('.check-all');
 const inputBox = document.querySelector('.input__box');
@@ -10,7 +12,7 @@ const incompleteCounter = document.querySelector('#active');
 const allButton = document.querySelector('.all-button');
 const pagesPagination = document.querySelector('.pages');
 // const pagesButton = document.querySelector('.createPage');
-// const someText = document.querySelector('.some-text')
+//  const someText = document.querySelector('.some-text')
 const removeChecked = document.querySelector('.remove-check')
 
 const keyEnter = "Enter";
@@ -25,10 +27,10 @@ let lastPage = 1;
 
 const task = (event) => {
   event.preventDefault();
-  const inputText = inputBox.value.trim().replace(/  +/g, ' ');
+  const inputText = inputBox.value.trim().replace(/\[[^\[\]]*]/g,'');
   if (inputText === "" || inputText === null ) return;
   const newTodo = {
-    description:_.escape(inputBox.value),
+    description: _.escape(inputText).replace(/\[[^\[\]]*]/g,''),
     isChecked: false,
     id: Date.now(),
   };
@@ -42,6 +44,7 @@ const task = (event) => {
   pagination();
   updateCounters();
   checkAllCheckbox();
+  toggleTodo();
 
 };
 
@@ -54,8 +57,8 @@ function displayList() {
     htmlList += `
       <li id ='${item.id}'>
       <input class='check' type='checkbox' id='${item.id}' ${item.isChecked ? "checked" : ""}>
-      <span class='some-text'>${item.description}</span>
-      <input id='${item.id}' class='new-input' type='text' value='${item.description}' hidden></input>
+      <span class='some-text'>${_.escape(item.description).trim().replace(/@*_+-./g,'')}</span>
+      <input id='${item.id}' class='new-input' type='text' value='${_.escape(item.description.trim().replace(/\[[^\[\]]*]/g))}' hidden></input>
       <button type='delete' class='del'>x</button>
       </li>
     `;
@@ -189,18 +192,18 @@ function removeOnce(event) {
 
 const editNew = (event) => {
   let newText = event.target.parentNode.children[2].value;
-  newText =_.escape(newText.trim().replace(/  +/g, ' '));
   if (event.sourceCapabilities !== null){
-    if (newText.trim() === '') {
-      displayList();
-    }
+     if (newText.trim() === '') return displayList();
+      
   }
   const todoId = Number(event.target.parentElement.id);
 
   todoList.forEach((item) => {
     if (item.id === todoId) {
       item.description = newText;
+       newText = _.escape(newText.trim().replace(/  +/g, ' '))
     }
+    
   });
   updateCounters();
   displayList();
@@ -242,6 +245,6 @@ allButton.addEventListener('click', swapFocus);
 pagesPagination.addEventListener('click', NextPage);
 list.addEventListener('blur', editNew, true);
 checkAllInput.addEventListener('click', checkAll);
-removeChecked.addEventListener('click', removeCheck)
+removeChecked.addEventListener('click', removeCheck);
 
  })()
