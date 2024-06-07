@@ -1,15 +1,17 @@
+ (() =>{ 
 const checkAllInput = document.querySelector('.check-all');
 const inputBox = document.querySelector('.input__box');
 const addButton = document.querySelector('.add');
 const list = document.querySelector('.list');
-const newInput = document.querySelector('.new-input');
+// const newInput = document.querySelector('.new-input');
 const totalCounter = document.querySelector('#all');
 const completedCounter = document.querySelector('#completed');
 const incompleteCounter = document.querySelector('#active');
 const allButton = document.querySelector('.all-button');
 const pagesPagination = document.querySelector('.pages');
-const pagesButton = document.querySelector('.createPage');
-const someText = document.querySelector('.some-text')
+// const pagesButton = document.querySelector('.createPage');
+// const someText = document.querySelector('.some-text')
+const removeChecked = document.querySelector('.remove-check')
 
 const keyEnter = "Enter";
 const keyEscape = "Escape";
@@ -23,10 +25,10 @@ let lastPage = 1;
 
 const task = (event) => {
   event.preventDefault();
-  const inputText = inputBox.value.trim();
-  if (inputText === "" || inputText === null) return;
+  const inputText = inputBox.value.trim().replace(/  +/g, ' ');
+  if (inputText === "" || inputText === null ) return;
   const newTodo = {
-    description: inputBox.value,
+    description:_.escape(inputBox.value),
     isChecked: false,
     id: Date.now(),
   };
@@ -47,18 +49,18 @@ function displayList() {
   thisPage(page);
   const sortedArray = filterTodo()
     .slice((page - 1) * itemPerPage, page * itemPerPage);
-  let htmllist = "";
+  let htmlList = "";
   sortedArray.forEach((item) => {
-    htmllist += `
+    htmlList += `
       <li id ='${item.id}'>
       <input class='check' type='checkbox' id='${item.id}' ${item.isChecked ? "checked" : ""}>
       <span class='some-text'>${item.description}</span>
-      <input id='${item.id}' class='new-input' type='text' value='${item.description.replace(/\s+/g, '')}' hidden></input>
+      <input id='${item.id}' class='new-input' type='text' value='${item.description}' hidden></input>
       <button type='delete' class='del'>x</button>
       </li>
     `;
   });
-  list.innerHTML = htmllist;
+  list.innerHTML = htmlList;
 
   
   pagination();
@@ -172,10 +174,10 @@ function swapFocus(event) {
   displayList();
 }
 
-const removeCheck = () => {
-  todoList = todoList.filter((todo) => !todo.isChecked);
-  displayList();
-};
+ const removeCheck = () => {
+   todoList = todoList.filter((todo) => !todo.isChecked);
+   displayList();
+ };
 
 function removeOnce(event) {
   const todoId = Number(event.target.parentElement.id);
@@ -187,7 +189,8 @@ function removeOnce(event) {
 
 const editNew = (event) => {
   let newText = event.target.parentNode.children[2].value;
-  if (event.sourceCapabilities !== null) {
+  newText =_.escape(newText.trim().replace(/  +/g, ' '));
+  if (event.sourceCapabilities !== null){
     if (newText.trim() === '') {
       displayList();
     }
@@ -202,6 +205,7 @@ const editNew = (event) => {
   updateCounters();
   displayList();
 }
+
 
 
 
@@ -238,13 +242,6 @@ allButton.addEventListener('click', swapFocus);
 pagesPagination.addEventListener('click', NextPage);
 list.addEventListener('blur', editNew, true);
 checkAllInput.addEventListener('click', checkAll);
+removeChecked.addEventListener('click', removeCheck)
 
-
-// const changeDescriptionFinish = (event) => {
-//   if (event.target.classList.contains("new-input")) {
-//     if (event.key === keyEnter) {
-//       const todoId = Number(event.target.parentElement.id);
-//       todoList = todoList.forEach((todo) => todo.id !== todoId);
-//       editNew(event);
-//     }
-//   
+ })()
